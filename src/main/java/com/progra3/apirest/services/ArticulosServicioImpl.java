@@ -60,7 +60,7 @@ public class ArticulosServicioImpl implements IArticulosService{
 	}
 
 	@Override
-	public Articulos findByIdSQL(String nombre) {
+	public ArrayList<Articulos> findByIdSQL(String nombre) {
 		return articulosDao.findByNombreSQL(nombre);
 	}
 
@@ -68,5 +68,16 @@ public class ArticulosServicioImpl implements IArticulosService{
 	@Transactional
 	public void safe(Articulos articulo) {
 		articulosDao.save(articulo);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAllArticulos() {
+		articulosDao.deleteAll();
+	}
+
+	@Override
+	public Long DevolverMaxId() {
+		return articulosDao.resultado();
 	}
 }

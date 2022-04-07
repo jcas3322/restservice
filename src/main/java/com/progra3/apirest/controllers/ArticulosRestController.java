@@ -7,6 +7,7 @@ import com.progra3.apirest.services.ArticulosServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,29 +18,45 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/articulos")
 public class ArticulosRestController {
     
     @Autowired
     private ArticulosServicioImpl articuloService;
     
-    @GetMapping()
+	@GetMapping("/maxid")
+	public Long devolverMaxId(){
+		return articuloService.DevolverMaxId();
+	}
+
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-	public ArrayList<Articulos> getProfesores(){
+	public ArrayList<Articulos> getArticulos(){
 		return articuloService.findAll();
 	}
+
+    @GetMapping("/buscarPor/{nombre}")
+	public ResponseEntity<?> getPorNombre(@PathVariable(value = "nombre")String nombre){
+		ArrayList<Articulos> listado = null;
+		listado = articuloService.findByIdSQL(nombre);
+		if (listado.size()>0){
+			return new ResponseEntity<>(listado, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+	}
 	
-	@PostMapping("/sign_up")
-	public ResponseEntity<Void> addArticulo(@RequestBody Articulos articulo){
+	@PostMapping("/agregar")
+	public ResponseEntity<?> addArticulo(@RequestBody Articulos articulo){
 		if(articuloService.findArticulo(articulo) == null) {
 			articuloService.safe(articulo);
-			return new ResponseEntity<Void> (HttpStatus.CREATED);
+			return new ResponseEntity<> (articulo, HttpStatus.CREATED);
 		}else {
 			return new ResponseEntity<Void> (HttpStatus.CONFLICT);
 		}
 	}
 
-	@PutMapping("/update/{id}")
+	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<?> updateArticulo(@PathVariable(value="id")long id, @RequestBody Articulos articulo){
 		Articulos articulosDb, respuesta = null;
 		articulosDb = articuloService.findById(id);
@@ -56,5 +73,17 @@ public class ArticulosRestController {
 		}
 	}
 
+	@DeleteMapping("/borrar/{id}")
+	public ResponseEntity<Void> deleteArticulo(@PathVariable(value = "id")Long id){
+		//Comprobar respuesta por si no existe
+		articuloService.deleteArticulo(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/borrartodo")
+	public ResponseEntity<Void> deleteAllArticulos(){
+		articuloService.deleteAllArticulos();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 }

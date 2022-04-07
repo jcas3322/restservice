@@ -1,5 +1,6 @@
 package com.progra3.apirest.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +18,15 @@ public interface IArticulosService {
 	public Optional<Articulos> findArticuloById(Long id);
 	
 	public void deleteArticulo(Long id);
+
+	public void deleteAllArticulos();
 	
 	public Articulos findById (Long id);
 	
-	public Articulos findByIdSQL(String nombre);
+	public ArrayList<Articulos> findByIdSQL(String nombre);
 	
 	public void safe (Articulos articulo);
+
+	public Long DevolverMaxId();
 
 }
