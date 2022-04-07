@@ -3,8 +3,8 @@ package com.progra3.apirest.controllers;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.progra3.apirest.models.ArticulosIngresados;
-import com.progra3.apirest.services.ArticulosIngresadosServicioImpl;
+import com.progra3.apirest.models.ArticulosVendidos;
+import com.progra3.apirest.services.ArticulosVendidosServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/articulosIngresados")
-public class ArticulosIngresadosRestController {
-
+@RequestMapping("/ArticulosVendidos")
+public class ArticulosVendidosRestController {
+    
     @Autowired
-    private ArticulosIngresadosServicioImpl articulosIngresados;
+    private ArticulosVendidosServicioImpl articulosVendidos;
 
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public ArrayList<ArticulosIngresados> getArticulosIngresados(){
-        return articulosIngresados.findAll();
+    @ResponseStatus(value = HttpStatus.OK)
+    public ArrayList<ArticulosVendidos> getAll() {
+        return articulosVendidos.findAll();
     }
 
-    @GetMapping("/buscarFecha/{fecha}")
-    public ResponseEntity<?> getIngresosPorFecha(@PathVariable(value = "fecha")Date fecha){
-        ArrayList<ArticulosIngresados> listado = articulosIngresados.findByFecha(fecha);
+    @GetMapping("/buscarIdVenta/{venta}")
+    public ResponseEntity<?> getIngresosPorFecha(@PathVariable(value = "venta")Long venta){
+        ArrayList<ArticulosVendidos> listado = articulosVendidos.findByIdVenta(venta);
         if (listado.size()>0){
             return new ResponseEntity<>(listado, HttpStatus.OK);
         }else{
@@ -41,8 +41,7 @@ public class ArticulosIngresadosRestController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<ArticulosIngresados> agregarIngreso(@RequestBody ArticulosIngresados ingresoArticulo){
-        return new ResponseEntity<ArticulosIngresados>(articulosIngresados.safe(ingresoArticulo), HttpStatus.CREATED);
+    public ResponseEntity<ArticulosVendidos> agregarIngreso(@RequestBody ArticulosVendidos ingresoVenta){
+        return new ResponseEntity<ArticulosVendidos>(articulosVendidos.safe(ingresoVenta), HttpStatus.CREATED);
     }
-    
 }

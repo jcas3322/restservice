@@ -27,5 +27,11 @@ public class ArticulosIngresadosServicioImpl implements IArticulosIngresadosServ
     public ArrayList<ArticulosIngresados> findByFecha(Date fecha) {
         return articulosIngresados.findByFechaIngreso(fecha);
     }
+
+    @Override
+    @Transactional
+    public ArticulosIngresados safe(ArticulosIngresados ingresoArticulo) {
+        return articulosIngresados.save(ingresoArticulo);
+    }
     
 }

@@ -27,5 +27,11 @@ public class RegistroVentasServicioImpl implements IRegistroVentasService{
     public ArrayList<RegistroDeVentas> findByFecha(Date fecha) {
         return registroVentas.findByFechaVenta(fecha);
     }
+
+    @Override
+    @Transactional
+    public RegistroDeVentas safe(RegistroDeVentas nuevoRegistro) {
+        return registroVentas.save(nuevoRegistro);
+    }
     
 }

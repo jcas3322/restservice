@@ -9,4 +9,6 @@ public interface IRegistroVentasService {
     public ArrayList<RegistroDeVentas> findAll();
 
     public ArrayList<RegistroDeVentas> findByFecha(Date fecha);
+
+    public RegistroDeVentas safe(RegistroDeVentas nuevoRegistro);
 }

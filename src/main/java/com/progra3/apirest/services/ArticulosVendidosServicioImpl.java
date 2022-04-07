@@ -26,5 +26,11 @@ public class ArticulosVendidosServicioImpl implements IArticulosVendidosService{
     public ArrayList<ArticulosVendidos> findByIdVenta(Long id) {
         return articulosVendidos.findByIdVenta(id);
     }
+
+    @Override
+    @Transactional
+    public ArticulosVendidos safe(ArticulosVendidos articulo) {
+        return articulosVendidos.save(articulo);
+    }
     
 }

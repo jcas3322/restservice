@@ -8,4 +8,6 @@ public interface IArticulosVendidosService {
     public ArrayList<ArticulosVendidos> findAll();
 
     public ArrayList<ArticulosVendidos> findByIdVenta(Long id);
+
+    public ArticulosVendidos safe(ArticulosVendidos articulo);
 }
