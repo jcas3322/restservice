@@ -1,7 +1,7 @@
 package com.progra3.apirest.repositories;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import com.progra3.apirest.models.ArticulosIngresados;
 

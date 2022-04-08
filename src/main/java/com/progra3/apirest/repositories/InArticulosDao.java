@@ -17,8 +17,8 @@ public interface InArticulosDao extends CrudRepository<Articulos, Long>{
     public Optional<Articulos> findById(Long id);
 
     //Query Methods
-    @Query("select max(id) from Articulos") 
-    Long resultado();
+    @Query(value = "select * from Articulos where id = (select max(id) from Articulos)",nativeQuery = true) 
+    public Articulos resultado();
 
     @Query("select p from Articulos p where p.nombre like %?1%")
 	public ArrayList<Articulos> findByNombreSQL(String nombre);

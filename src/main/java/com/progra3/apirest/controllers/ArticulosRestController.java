@@ -25,7 +25,7 @@ public class ArticulosRestController {
     private ArticulosServicioImpl articuloService;
     
 	@GetMapping("/maxid")
-	public Long devolverMaxId(){
+	public Articulos devolverMaxId(){
 		return articuloService.DevolverMaxId();
 	}
 

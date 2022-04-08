@@ -1,7 +1,7 @@
 package com.progra3.apirest.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import com.progra3.apirest.models.RegistroDeVentas;
 import com.progra3.apirest.services.RegistroVentasServicioImpl;
@@ -29,6 +29,12 @@ public class RegistroDeVentasRestController {
     @ResponseStatus(value = HttpStatus.OK)
     public ArrayList<RegistroDeVentas> getAll() {
         return registroVentas.findAll();
+    }
+
+    @GetMapping("/maxid")
+    @ResponseStatus(value = HttpStatus.OK)
+    public RegistroDeVentas IdMaximo(){
+        return registroVentas.maximoId();
     }
 
     @GetMapping("/buscarFecha/{fecha}")

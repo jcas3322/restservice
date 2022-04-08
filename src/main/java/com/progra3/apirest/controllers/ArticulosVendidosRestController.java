@@ -1,7 +1,6 @@
 package com.progra3.apirest.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.progra3.apirest.models.ArticulosVendidos;
 import com.progra3.apirest.services.ArticulosVendidosServicioImpl;

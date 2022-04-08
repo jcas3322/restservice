@@ -77,7 +77,7 @@ public class ArticulosServicioImpl implements IArticulosService{
 	}
 
 	@Override
-	public Long DevolverMaxId() {
+	public Articulos DevolverMaxId() {
 		return articulosDao.resultado();
 	}
 }

@@ -27,6 +27,6 @@ public interface IArticulosService {
 	
 	public void safe (Articulos articulo);
 
-	public Long DevolverMaxId();
+	public Articulos DevolverMaxId();
 
 }

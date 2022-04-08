@@ -1,15 +1,14 @@
 package com.progra3.apirest.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "RegistroDeVentas")
@@ -19,17 +18,18 @@ public class RegistroDeVentas implements Serializable {
     @Column (unique = true)
     private long id;
 
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.TIMESTAMP)
     private Date fechaVenta;
 
-    @Temporal(TemporalType.TIME)
-    private Date horaVenta;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private Time horaVenta;
 
     @PrePersist 
     public void prePersist(){
-        fechaVenta=new Date();
-        horaVenta= new Date();
+        fechaVenta=new Date(new java.util.Date().getTime());
+        horaVenta= new Time(new java.util.Date().getTime());
     }
+    
     private Double montoVenta;
     private int cantidadArticulosVendidos;
     public long getId() {
@@ -47,10 +47,10 @@ public class RegistroDeVentas implements Serializable {
     public void setMontoVenta(Double montoVenta) {
         this.montoVenta = montoVenta;
     }
-    public Date getHoraVenta() {
+    public Time getHoraVenta() {
         return horaVenta;
     }
-    public void setHoraVenta(Date horaVenta) {
+    public void setHoraVenta(Time horaVenta) {
         this.horaVenta = horaVenta;
     }
     public Date getFechaVenta() {

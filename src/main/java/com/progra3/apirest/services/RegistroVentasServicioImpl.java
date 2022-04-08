@@ -1,7 +1,7 @@
 package com.progra3.apirest.services;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import com.progra3.apirest.models.RegistroDeVentas;
 import com.progra3.apirest.repositories.InRegistroVentasDao;
@@ -32,6 +32,12 @@ public class RegistroVentasServicioImpl implements IRegistroVentasService{
     @Transactional
     public RegistroDeVentas safe(RegistroDeVentas nuevoRegistro) {
         return registroVentas.save(nuevoRegistro);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public RegistroDeVentas maximoId() {
+        return registroVentas.maxId();
     }
     
 }

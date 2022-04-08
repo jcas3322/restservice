@@ -1,7 +1,7 @@
 package com.progra3.apirest.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table (name = "ArticulosIngresados")
@@ -23,13 +21,11 @@ public class ArticulosIngresados implements Serializable{
     private long id;
     private long idArticulo;
     private int cantidadIngreso;
-
-    @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
 
     @PrePersist
     public void prePersist(){
-        fechaIngreso = new Date();
+        fechaIngreso = new Date(new java.util.Date().getTime());
     }
 
     public long getId() {
