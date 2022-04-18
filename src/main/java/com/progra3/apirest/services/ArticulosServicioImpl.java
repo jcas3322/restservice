@@ -77,7 +77,14 @@ public class ArticulosServicioImpl implements IArticulosService{
 	}
 
 	@Override
+	@Transactional (readOnly = true)
 	public Articulos DevolverMaxId() {
 		return articulosDao.resultado();
+	}
+
+	@Override
+	@Transactional (readOnly = true)
+	public Articulos findByCodigo(String codigo) {
+		return (Articulos) articulosDao.findByCodigo(codigo);
 	}
 }

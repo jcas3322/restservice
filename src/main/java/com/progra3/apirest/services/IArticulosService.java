@@ -10,6 +10,8 @@ public interface IArticulosService {
 	public List<Articulos> findAll();
 	
 	public Articulos findArticulo(Articulos articulo);
+
+	public Articulos findByCodigo(String codigo);
 	
 	public void deleteArticulo(Articulos articulo);
 	

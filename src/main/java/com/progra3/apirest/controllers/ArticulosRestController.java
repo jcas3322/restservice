@@ -35,6 +35,17 @@ public class ArticulosRestController {
 		return articuloService.findAll();
 	}
 
+	@GetMapping("/buscarCodigo/{codigo}")
+	public ResponseEntity<?> getPorCodigo(@PathVariable(value ="codigo")String codigo){
+		Articulos articulo = null;
+		articulo = articuloService.findByCodigo(codigo);
+		if (articulo != null){
+			return new ResponseEntity<>(articulo, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+	}
+
     @GetMapping("/buscarPor/{nombre}")
 	public ResponseEntity<?> getPorNombre(@PathVariable(value = "nombre")String nombre){
 		ArrayList<Articulos> listado = null;
